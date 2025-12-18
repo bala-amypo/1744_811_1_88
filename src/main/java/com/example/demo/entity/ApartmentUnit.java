@@ -14,7 +14,7 @@ public class ApartmentUnit {
     private Long userId;
     public ApartmentUnit(Long id,String unitNumber,Integer floor,Long userId){
         this.id=id;
-        @
+        @Column(unique = true)
         this.unitNumber=unitNumber;
         this.floor=floor;
         this.userId=userId;
