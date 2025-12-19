@@ -1,10 +1,11 @@
 package com.example.demo.repository;
 
 import com.example.demo.model.ApartmentUnit;
+import com.example.demo.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ApartmentUnitRepository
-        extends JpaRepository<ApartmentUnit, Long> {
+import java.util.Optional;
 
-    Apartment findByOwner(User user);
+public interface ApartmentUnitRepository extends JpaRepository<ApartmentUnit, Long> {
+    Optional<ApartmentUnit> findByOwner(User user);
 }
