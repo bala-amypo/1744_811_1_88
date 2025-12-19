@@ -10,17 +10,16 @@ import org.springframework.web.bind.annotation.*;
 public class ApartmentUnitController {
 
     @Autowired
-    private ApartmentUnitService apartmentUnitService;
+    private ApartmentUnitService service;
 
     @PostMapping("/assign/{userId}")
-    public ApartmentUnit assignUnit(
-            @PathVariable Long userId,
-            @RequestBody ApartmentUnit unit) {
-        return apartmentUnitService.assignUnitToUser(userId, unit);
+    public ApartmentUnit assign(@PathVariable Long userId,
+                                @RequestBody ApartmentUnit unit) {
+        return service.assignUnitToUser(userId, unit);
     }
 
     @GetMapping("/user/{userId}")
-    public ApartmentUnit getUnitByUser(@PathVariable Long userId) {
-        return apartmentUnitService.getUnitByUser(userId);
+    public ApartmentUnit get(@PathVariable Long userId) {
+        return service.getUnitByUser(userId);
     }
 }
