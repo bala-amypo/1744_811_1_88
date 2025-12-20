@@ -1,7 +1,9 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.model.ApartmentUnit;
+import com.example.demo.model.User;
 import com.example.demo.repository.ApartmentUnitRepository;
+import com.example.demo.repository.UserRepository;
 import com.example.demo.service.ApartmentUnitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,16 +12,21 @@ import org.springframework.stereotype.Service;
 public class ApartmentUnitServiceImpl implements ApartmentUnitService {
 
     @Autowired
-    private ApartmentUnitRepository apart;
+    private ApartmentUnitRepository apartmentUnitRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     public ApartmentUnit assignUnitToUser(Long userId, ApartmentUnit unit) {
-        unit.setUserId(userId);
-        return apart.save(unit);
+        User user = userRepository.findById(userId).orElse(null);
+        unit.setOwner(user);
+        return apartmentUnitRepository.save(unit);
     }
 
     @Override
     public ApartmentUnit getUnitByUser(Long userId) {
-        return apart.findByUserId(userId);
+        User user = userRepository.findById(userId).orElse(null);
+        return apartmentUnitRepository.findByOwner(user).orElse(null);
     }
 }
