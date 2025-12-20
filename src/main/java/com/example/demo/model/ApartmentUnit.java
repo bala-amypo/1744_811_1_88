@@ -16,16 +16,10 @@ public class ApartmentUnit {
     private Integer floor;
 
     @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "owner_id")
     private User owner;
 
     public ApartmentUnit() {
-    }
-
-    public ApartmentUnit(Long id, String unitNumber, Integer floor, User owner) {
-        this.id = id;
-        this.unitNumber = unitNumber;
-        this.floor = floor;
-        this.owner = owner;
     }
 
     public Long getId() {
