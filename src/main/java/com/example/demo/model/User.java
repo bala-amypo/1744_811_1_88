@@ -29,6 +29,7 @@ public class User {
     private String role = "RESIDENT";
 
     @OneToOne(mappedBy = "owner")
+    @JsonIgnore
     private ApartmentUnit apartmentUnit;
 
     public User(ApartmentUnit apartmentUnit, String email, Long id, String name, String password) {

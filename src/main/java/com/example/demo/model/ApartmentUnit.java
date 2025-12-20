@@ -15,8 +15,7 @@ public class ApartmentUnit {
 
     private Integer floor;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-    @JoinColumn(name = "owner_id")
+    @OneToOne(fetch = FetchType.EAGER)
     private User owner;
 
     public ApartmentUnit() {
