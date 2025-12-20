@@ -2,10 +2,8 @@ package com.example.demo.model;
 
 import jakarta.persistence.*;
 
-
 @Entity
 @Table(name = "apartment_units")
-
 public class ApartmentUnit {
 
     @Id
@@ -17,18 +15,18 @@ public class ApartmentUnit {
 
     private Integer floor;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "owner_id")
     private User owner;
 
-    public ApartmentUnit(Integer floor, Long id, User owner, String unitNumber) {
-        this.floor = floor;
-        this.id = id;
-        this.owner = owner;
-        this.unitNumber = unitNumber;
+    public ApartmentUnit() {
     }
 
-    public ApartmentUnit() {
+    public ApartmentUnit(Long id, String unitNumber, Integer floor, User owner) {
+        this.id = id;
+        this.unitNumber = unitNumber;
+        this.floor = floor;
+        this.owner = owner;
     }
 
     public Long getId() {
@@ -62,6 +60,4 @@ public class ApartmentUnit {
     public void setOwner(User owner) {
         this.owner = owner;
     }
-
-  
 }
