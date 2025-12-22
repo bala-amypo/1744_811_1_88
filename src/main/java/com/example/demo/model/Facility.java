@@ -15,7 +15,7 @@ public class Facility {
     private Long id;
 
     @Column(unique = true)
-    @NotBlank(message = "Facility name must not be blank")
+    @NotBlank(message = "Error-Interval server error")
     private String name;
 
     @NotBlank(message = "Description must not be blank")
@@ -40,7 +40,7 @@ public class Facility {
     public Facility() {
     }
 
-    // Getters and Setters
+
     public Long getId() {
         return id;
     }
