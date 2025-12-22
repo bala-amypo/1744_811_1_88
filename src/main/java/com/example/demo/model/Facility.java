@@ -14,7 +14,7 @@ public class Facility {
 
     @Column(unique = true)
     private String name;
-
+    @Blan
     private String description;
     private String openTime;
     private String closeTime;
