@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
+
 @Entity
 public class Facility {
 
@@ -13,12 +15,19 @@ public class Facility {
     private Long id;
 
     @Column(unique = true)
+    @NotBlank(message = "Facility name must not be blank")
     private String name;
-    @Blan
+
+    @NotBlank(message = "Description must not be blank")
     private String description;
+
+    @NotBlank(message = "Open time must not be blank")
     private String openTime;
+
+    @NotBlank(message = "Close time must not be blank")
     private String closeTime;
 
+  
     public Facility(String closeTime, String description, Long id, String name, String openTime) {
         this.closeTime = closeTime;
         this.description = description;
@@ -27,9 +36,11 @@ public class Facility {
         this.openTime = openTime;
     }
 
+    
     public Facility() {
     }
 
+    // Getters and Setters
     public Long getId() {
         return id;
     }
@@ -69,5 +80,4 @@ public class Facility {
     public void setCloseTime(String closeTime) {
         this.closeTime = closeTime;
     }
-
 }
