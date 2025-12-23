@@ -2,20 +2,27 @@ package com.example.demo.controller;
 
 import com.example.demo.model.BookingLog;
 import com.example.demo.service.BookingLogService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
-@RequestMapping("/logs")
+@RequestMapping("/booking-logs")
 public class BookingLogController {
 
-    @Autowired
-    private BookingLogService service;
+    private final BookingLogService bookingLogService;
 
-    @GetMapping("/booking/{bookingId}")
-    public List<BookingLog> logs(@PathVariable Long bookingId) {
-        return service.getLogsByBooking(bookingId);
+    public BookingLogController(BookingLogService bookingLogService) {
+        this.bookingLogService = bookingLogService;
+    }
+
+    @PostMapping("/{bookingId}")
+    public BookingLog addLog(@PathVariable Long bookingId,
+                             @RequestParam String message) {
+        return bookingLogService.addLog(bookingId, message);
+    }
+
+    @GetMapping("/{bookingId}")
+    public List<BookingLog> getLogs(@PathVariable Long bookingId) {
+        return bookingLogService.getLogsByBooking(bookingId);
     }
 }
