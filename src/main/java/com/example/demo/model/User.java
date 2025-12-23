@@ -1,16 +1,18 @@
 package com.example.demo.model;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "users")
@@ -20,72 +22,55 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String name;
 
-    @Column(unique = true)
+    @Column(nullable = false, unique = true)
     private String email;
 
+    @Column(nullable = false)
+    @JsonIgnore
     private String password;
 
+    @Column(nullable = false)
     private String role = "RESIDENT";
 
-    @OneToOne(mappedBy = "owner")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Booking> bookings;
+
+    @OneToOne(mappedBy = "owner", cascade = CascadeType.ALL)
     @JsonIgnore
     private ApartmentUnit apartmentUnit;
 
-    public User(ApartmentUnit apartmentUnit, String email, Long id, String name, String password) {
-        this.apartmentUnit = apartmentUnit;
-        this.email = email;
+    public User() {}
+
+    public User(Long id, String name, String email, String password, String role) {
         this.id = id;
         this.name = name;
-        this.password = password;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
         this.role = role;
     }
 
-    public ApartmentUnit getApartmentUnit() {
-        return apartmentUnit;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public void setApartmentUnit(ApartmentUnit apartmentUnit) {
-        this.apartmentUnit = apartmentUnit;
-    }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
+
+    public String getPassword() { return password; }
+    public void setPassword(String password) { this.password = password; }
+
+    public String getRole() { return role; }
+    public void setRole(String role) { this.role = role; }
+
+    public List<Booking> getBookings() { return bookings; }
+    public void setBookings(List<Booking> bookings) { this.bookings = bookings; }
+
+    public ApartmentUnit getApartmentUnit() { return apartmentUnit; }
+    public void setApartmentUnit(ApartmentUnit apartmentUnit) { this.apartmentUnit = apartmentUnit; }
 }
