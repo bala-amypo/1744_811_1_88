@@ -2,24 +2,26 @@ package com.example.demo.controller;
 
 import com.example.demo.model.ApartmentUnit;
 import com.example.demo.service.ApartmentUnitService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/units")
 public class ApartmentUnitController {
 
-    @Autowired
-    private ApartmentUnitService service;
+    private final ApartmentUnitService apartmentUnitService;
 
-    @PostMapping("/assign/{userId}")
-    public ApartmentUnit assign(@PathVariable Long userId,
-                                @RequestBody ApartmentUnit unit) {
-        return service.assignUnitToUser(userId, unit);
+    public ApartmentUnitController(ApartmentUnitService apartmentUnitService) {
+        this.apartmentUnitService = apartmentUnitService;
     }
 
-    @GetMapping("/user/{userId}")
-    public ApartmentUnit get(@PathVariable Long userId) {
-        return service.getUnitByUser(userId);
+    @PostMapping("/{userId}")
+    public ApartmentUnit assignUnit(@PathVariable Long userId,
+                                    @RequestBody ApartmentUnit unit) {
+        return apartmentUnitService.assignUnitToUser(userId, unit);
+    }
+
+    @GetMapping("/{userId}")
+    public ApartmentUnit getUnit(@PathVariable Long userId) {
+        return apartmentUnitService.getUnitByUser(userId);
     }
 }
