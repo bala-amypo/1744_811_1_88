@@ -1,6 +1,15 @@
 package com.example.demo.model;
 
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "apartment_units")
@@ -10,16 +19,25 @@ public class ApartmentUnit {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
+    @Column(nullable = false)
     private String unitNumber;
 
-    private Integer floor;
+    @Column(nullable = false)
+    private int floor;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne
     @JoinColumn(name = "owner_id")
+    @JsonIgnore
     private User owner;
 
     public ApartmentUnit() {
+    }
+
+    public ApartmentUnit(Long id, String unitNumber, int floor, User owner) {
+        this.id = id;
+        this.unitNumber = unitNumber;
+        this.floor = floor;
+        this.owner = owner;
     }
 
     public Long getId() {
@@ -38,11 +56,11 @@ public class ApartmentUnit {
         this.unitNumber = unitNumber;
     }
 
-    public Integer getFloor() {
+    public int getFloor() {
         return floor;
     }
 
-    public void setFloor(Integer floor) {
+    public void setFloor(int floor) {
         this.floor = floor;
     }
 

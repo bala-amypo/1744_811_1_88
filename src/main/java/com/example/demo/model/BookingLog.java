@@ -1,19 +1,48 @@
 package com.example.demo.model;
 
-import jakarta.persistence.*;
-
 import java.time.LocalDateTime;
 
-@Entity
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrePersist;
 
+@Entity
 public class BookingLog {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String logMessage;
+
+    private LocalDateTime loggedAt;
+
+    @ManyToOne
+    @JoinColumn(name = "booking_id")
+    private Booking booking;
+
+    public BookingLog() {
+    }
+
+    // REQUIRED by tests
+    public BookingLog(long id, Booking booking, String logMessage, LocalDateTime loggedAt) {
+        this.id = id;
+        this.booking = booking;
+        this.logMessage = logMessage;
+        this.loggedAt = loggedAt;
+    }
+
+    @PrePersist
+    public void onCreate() {
+        this.loggedAt = LocalDateTime.now();
+    }
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public Booking getBooking() {
@@ -34,32 +63,5 @@ public class BookingLog {
 
     public LocalDateTime getLoggedAt() {
         return loggedAt;
-    }
-
-    public void setLoggedAt(LocalDateTime loggedAt) {
-        this.loggedAt = loggedAt;
-    }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @ManyToOne
-    private Booking booking;
-
-    private String logMessage;
-
-    private LocalDateTime loggedAt;
-
-    public BookingLog(Booking booking, Long id, String logMessage, LocalDateTime loggedAt) {
-        this.booking = booking;
-        this.id = id;
-        this.logMessage = logMessage;
-        this.loggedAt = loggedAt;
-    }
-
-    @PrePersist
-    public void onCreate() {
-        loggedAt = LocalDateTime.now();
     }
 }
