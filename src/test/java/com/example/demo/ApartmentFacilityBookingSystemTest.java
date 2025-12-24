@@ -687,4 +687,3 @@ public class ApartmentFacilityBookingSystemTest {
         Assert.assertNotNull(facilityService.getAllFacilities());
     }
 }
-
