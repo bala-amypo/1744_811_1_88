@@ -28,7 +28,7 @@ public class BookingLog {
     public BookingLog() {
     }
 
-    // REQUIRED by tests
+   
     public BookingLog(long id, Booking booking, String logMessage, LocalDateTime loggedAt) {
         this.id = id;
         this.booking = booking;

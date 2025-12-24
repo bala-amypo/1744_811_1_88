@@ -38,7 +38,7 @@ public class Booking {
         this.status = (status == null) ? STATUS_CONFIRMED : status;
     }
 
-   w
+   
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
