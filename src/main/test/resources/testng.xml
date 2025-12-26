@@ -1,8 +1,11 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Apartment Facility Booking System Suite">
-    <test name="All Tests">
-        <classes>
-            <class name="com.example.demo.ApartmentFacilityBookingSystemTest"/>
-        </classes>
+
+    <test name="All Application Tests">
+        <packages>
+            <!-- This scans all test classes under this package -->
+            <package name="com.example.demo"/>
+        </packages>
     </test>
+
 </suite>
