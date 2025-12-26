@@ -39,13 +39,23 @@ public class Booking {
     }
 
    
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Long getId() { 
+    return id; 
+    }
+    public void setId(Long id) { 
+    this.id = id; 
+    }
 
-    public Facility getFacility() { return facility; }
-    public void setFacility(Facility facility) { this.facility = facility; }
+    public Facility getFacility() { 
+    return facility;
+     }
+    public void setFacility(Facility facility) { 
+    this.facility = facility;
+     }
 
-    public User getUser() { return user; }
+    public User getUser() {
+     return user;
+      }
     public void setUser(User user) { this.user = user; }
 
     public LocalDateTime getStartTime() { return startTime; }
