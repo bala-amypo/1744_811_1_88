@@ -16,10 +16,10 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http
-            // Disable CSRF for REST APIs
+           
             .csrf(csrf -> csrf.disable())
 
-            // 🔓 Allow everything
+          
             .authorizeHttpRequests(auth -> auth
                 .anyRequest().permitAll()
             );
@@ -27,13 +27,13 @@ public class SecurityConfig {
         return http.build();
     }
 
-    // Password encoder (still needed for register/login)
+    
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    // Authentication manager (login will still work)
+ 
     @Bean
     public AuthenticationManager authenticationManager(
             AuthenticationConfiguration authenticationConfiguration) throws Exception {
