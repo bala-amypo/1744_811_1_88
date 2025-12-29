@@ -6,18 +6,18 @@ public class ApiResponse {
     private String message;
     private Object data;
 
-    // No-args constructor
+   
     public ApiResponse() {
     }
 
-    // All-args constructor
+  
     public ApiResponse(boolean success, String message, Object data) {
         this.success = success;
         this.message = message;
         this.data = data;
     }
 
-    // Getters and Setters
+  
     public boolean isSuccess() {
         return success;
     }
